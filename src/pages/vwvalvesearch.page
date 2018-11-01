@@ -1,0 +1,200 @@
+<apex:page Controller="VWValveSearchController" standardStylesheets="false" renderAs="HTML" showHeader="false" sidebar="false" id="VWValveSearch" >
+   <apex:tabPanel >    
+    <apex:tab label="Input Filters" name="inputfilters" id="inputfiltersId" styleClass="input-filters">
+            <apex:form >
+                <fieldset>
+                    
+                    <br/>
+                    <label>Function</label>
+                        <apex:selectList size="1" id="filterFunction" onchange="manageFilters()">
+                            <apex:selectOption itemValue="2-Way" itemLabel="2-Way"/>
+                            <apex:selectOption itemValue="3-Way Mixing" itemLabel="3-Way Mixing"/>
+                            <apex:selectOption itemValue="3-Way Diverting" itemLabel="3-Way Diverting"/>
+                                                
+                        </apex:selectList>
+                    
+                    <br/>
+                    <label>Valve Series</label>
+                        <apex:selectList size="1" id="filterValveSeries" onchange="manageFilters()">
+                            <apex:selectOption itemValue="Any" itemLabel="Any"/>
+                            <apex:selectOption itemValue="1800 Series" itemLabel="1800 Series"/>
+                            <apex:selectOption itemValue="2800 Series" itemLabel="2800 Series"/>
+                            <apex:selectOption itemValue="2900 Series" itemLabel="2900 Series"/>
+                            <apex:selectOption itemValue="3800 Series" itemLabel="3800 Series"/>
+                            <apex:selectOption itemValue="5800 Series" itemLabel="5800 Series"/>
+                            <apex:selectOption itemValue="BAC" itemLabel="BAC"/>
+                            <apex:selectOption itemValue="AMA AmurAct" itemLabel="AMA AmurAct"/>
+                            <apex:selectOption itemValue="AMB AmurAct" itemLabel="AMB AmurAct"/>
+                            <apex:selectOption itemValue="AMC AmurAct" itemLabel="AMC AmurAct"/>
+                            <apex:selectOption itemValue="AMD AmurAct" itemLabel="AMD AmurAct"/>
+                            
+                            <!--ARA ARIA Sereis Rules -->                    
+                            
+                            <apex:selectOption itemValue="ARA ARIA" itemLabel="ARA"/>  
+
+                        
+                                            
+                    </apex:selectList>
+                    
+
+                    <br/>
+                    <label>Body Size Range</label>
+                        <apex:selectList size="1" id="filterBodySizeRange">
+                            <apex:selectOption itemValue="1/2 Inlet Pipe Size to Pipe Size" itemLabel="1/2 Inlet Pipe Size to Pipe Size"/>
+                            <apex:selectOption itemValue="Equal to Inlet Pipe Size" itemLabel="Equal to Inlet Pipe Size"/>
+                            
+                        </apex:selectList>
+                    
+
+                    <br/>
+                    <label>Body Material</label>
+                        <apex:selectList size="1" id="filterBodyMaterial" onchange="manageFilters()">
+                            <apex:selectOption itemValue="Any" itemLabel="Any"/>
+                            <apex:selectOption itemValue="Carbon Steel" itemLabel="Carbon Steel"/>
+                            <apex:selectOption itemValue="Stainless Steel" itemLabel="Stainless Steel"/>
+                            <apex:selectOption itemValue="Cast Iron" itemLabel="Cast Iron"/>
+                            <apex:selectOption itemValue="Bronze" itemLabel="Bronze"/>
+                        </apex:selectList>
+                    
+
+                    <br/>
+                    <label>End Connection</label>
+                        <apex:selectList size="1" id="filterEndConnection" onchange="manageFilters()">
+                            <apex:selectOption itemValue="Any" itemLabel="Any"/>
+                            <apex:selectOption itemValue="125/150 lb. Flanged" itemLabel="125/150 lb. Flanged"/>
+                            <apex:selectOption itemValue="250/300 lb. Flanged" itemLabel="250/300 lb. Flanged"/>
+                            <apex:selectOption itemValue="Screwed" itemLabel="Screwed"/>
+                            <apex:selectOption itemValue="Buttweld End" itemLabel="Buttweld End"/>
+                            <apex:selectOption itemValue="Socket Weld" itemLabel="Socket Weld"/>
+                        </apex:selectList>
+                    
+
+                    <br/>
+                    <label>ANSI Pressure Class</label>
+                        <apex:selectList size="1" id="filterANSIPressureClass" onchange="manageFilters()">
+                            <apex:selectOption itemValue="Any" itemLabel="Any"/>
+                            <apex:selectOption itemValue="ANSI Class 125" itemLabel="ANSI Class 125"/>
+                            <apex:selectOption itemValue="ANSI Class 150" itemLabel="ANSI Class 150"/>
+                            <apex:selectOption itemValue="ANSI Class 250" itemLabel="ANSI Class 250"/>
+                            <apex:selectOption itemValue="ANSI Class 300" itemLabel="ANSI Class 300"/>
+                        </apex:selectList>
+                    
+
+                    <br/>
+                    <label>Trim Material</label>
+                        <apex:selectList size="1" id="filterTrimMaterial" onchange="manageFilters()">
+                            <apex:selectOption itemValue="Any" itemLabel="Any"/>
+                            <apex:selectOption itemValue="Stainless Steel" itemLabel="Stainless Steel"/>
+                            <apex:selectOption itemValue="Alloy 6 / 316 SS" itemLabel="Alloy 6 / 316 SS"/>
+                            <apex:selectOption itemValue="Alloy 6 / 316 SS w/17-4 Seat Retainer" itemLabel="Alloy 6 / 316 SS w/17-4 Seat Retainer"/>
+                            <apex:selectOption itemValue="TTZ Ceramic" itemLabel="TTZ Ceramic"/>
+                            <apex:selectOption itemValue="TTZ Ceramic w/17-4 Seat Retainer" itemLabel="TTZ Ceramic w/17-4 Seat Retainer"/>
+                            <apex:selectOption itemValue="Teflon" itemLabel="Teflon"/>
+                            <apex:selectOption itemValue="PEEK" itemLabel="PEEK"/>
+                            <apex:selectOption itemValue="Bronze" itemLabel="Bronze"/>
+                            <apex:selectOption itemValue="17-4 PH" itemLabel="17-4 PH"/>
+                            <apex:selectOption itemValue="400 Stainless Steel" itemLabel="400 Stainless Steel"/>
+                            <apex:selectOption itemValue="Alloy 6 / 400 SS" itemLabel="Alloy 6 / 400 SS"/>
+                        </apex:selectList>
+                    
+
+                    <br/>
+                    <!-- Trim Style renamed to Flow Characteristic -->
+                    <label>Flow Characteristic</label>
+                        <apex:selectList size="1" id="filterTrimStyle" onchange="manageFilters()">
+                            <apex:selectOption itemValue="Any" itemLabel="Any"/>
+                            <apex:selectOption itemValue="Equal Percent" itemLabel="Equal Percent"/>
+                            <apex:selectOption itemValue="Linear" itemLabel="Linear"/>
+                            <apex:selectOption itemValue="Modified Linear" itemLabel="Modified Linear"/>
+                        </apex:selectList>
+                    
+
+                    <br/>
+                    <!-- ANSI Shutoff Class renamed to ANSI Leakage Class -->
+                    <label>ANSI Leakage Class</label>
+                        <apex:selectList size="1" id="filterANSIShutoffClass" onchange="manageFilters()">
+                            <apex:selectOption itemValue="Any" itemLabel="Any"/>
+                            <apex:selectOption itemValue="ANSI Class II" itemLabel="ANSI Class II"/>
+                            <apex:selectOption itemValue="ANSI Class III" itemLabel="ANSI Class III"/>
+                            <apex:selectOption itemValue="ANSI Class IV" itemLabel="ANSI Class IV"/>
+                            <apex:selectOption itemValue="ANSI Class V" itemLabel="ANSI Class V"/>
+                            <apex:selectOption itemValue="ANSI Class VI" itemLabel="ANSI Class VI"/>
+                        </apex:selectList>
+                    
+
+                    <br/>
+                    <label>Packing Type</label>
+                        <apex:selectList size="1" id="filterPackingType" onchange="manageFilters()">
+                            <apex:selectOption itemValue="Any" itemLabel="Any"/>
+                            <apex:selectOption itemValue="Self Adjusting PTFE V-Ring" itemLabel="Self Adjusting PTFE V-Ring"/>
+                            <apex:selectOption itemValue="Adjustable Graphite" itemLabel="Adjustable Graphite"/>
+                            <apex:selectOption itemValue="Vacuum Service, PTFE V-Ring" itemLabel="Vacuum Service, PTFE V-Ring"/>
+                            <apex:selectOption itemValue="EPDM" itemLabel="EPDM"/>
+                            <apex:selectOption itemValue="Adjustable Teflon V-Ring" itemLabel="Adjustable Teflon V-Ring"/>
+                            <apex:selectOption itemValue="Lower Temp Graphite" itemLabel="Lower Temp Graphite"/>
+                        </apex:selectList>
+                    <br/>
+                    <label>Flow Direction</label>
+                        <apex:selectList size="1" id="filterFlowDirection" onchange="manageFilters()">
+                            <apex:selectOption itemValue="Any" itemLabel="Any"/>
+                            <apex:selectOption itemValue="Flow To Open" itemLabel="Flow To Open"/>
+                            <apex:selectOption itemValue="Flow To Close" itemLabel="Flow To Close"/>
+                            <apex:selectOption itemValue="Under" itemLabel="Under"/>
+                        </apex:selectList>
+                    <br/>
+                    <label>Custom Testing</label>
+                    <apex:selectList id="someList" size="1" onclick="managefilter()">
+                        <!--apex:selectOptions value="{!items}" /-->
+                        <!--apex:selectOptions value="{!items}"/-->
+                    </apex:selectList>
+                    <br/>
+                    <label>Valve Style</label>
+                    <label>Valve Style</label>
+                    <apex:selectList size="1" id="okseries" value="{!selectedSeries}" onchange="managefilter() ">
+                            <apex:selectOption itemValue="ara" itemLabel="ara"/>
+                            <apex:selectOption itemValue="arb" itemLabel="arb"/>
+                            <apex:selectOption itemValue="arc" itemLabel="arc"/>
+                        </apex:selectList>
+                   
+                    <br/>
+                    
+                     <apex:selectList id="filtermySwitches" value="{!selectedSeries}" size="1" onchange="aramanagefilter(); updatemessage();CallUpdateModelTest();">
+                        <apex:selectOption itemvalue="Choose Item..." itemLabel="Choose Item..."/>
+                        <apex:selectOption itemvalue="0 - None" itemLabel="0 - None"/>
+                       <apex:selectOption itemvalue="S - Silver Contact Limit Switches" itemLabel="S - Silver Black Contact Limit Switches"/>
+                       
+                    </apex:selectList>
+					<apex:actionFunction name="ara" action="{!araSeries}" rerender="selectedSeries" />
+					
+                            <apex:outputPanel id="bonnetPrice"   >
+                                $<apex:inputText id="bonnetConstructionPrice" styleClass="PriceField" value="{!strBonnetConstructionPrice}" html-readonly="true"/>
+                            </apex:outputPanel>
+                        					
+           
+           
+                </fieldset>
+                <apex:actionFunction name="CallUpdateModelTest" action="{!updateModelTestTrimed}"  rerender="bonnetPrice"  />
+                    <!--apex:actionFunction name="updateSpecialOptionPrice" action="{!getout}" rerender="selectedSeries" /-->
+                
+                <br/>
+            </apex:form>
+        
+        </apex:tab>
+    </apex:tabPanel>
+    <script>
+    
+    
+        function aramanagefilter(){ 
+            ara();
+        }
+    	function updatemessage() {
+        	var str = '{!message}';
+            alert(str);
+        }
+    
+        function managefilter(){
+            updateSpecialOptionPrice();
+            alert('in simple manage filter');
+        }
+    </script>
+</apex:page>
